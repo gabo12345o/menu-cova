@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>COVA - Menú de Pedidos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #003366;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+        h1 { color: #0055aa; }
+        .menu-container {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid #0055aa;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f0f8ff;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #cce5ff;
+            font-size: 1.1em;
+        }
+        .item:last-child { border-bottom: none; }
+        .btn-whatsapp {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 25px;
+            background-color: #0055aa;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .btn-whatsapp:hover { background-color: #003366; }
+    </style>
+</head>
+<body>
+
+    <!-- Logo actualizado con el nombre correcto -->
+    <img src="logo.png.png" alt="Logo COVA" class="logo">
+    
+    <h1>Menú COVA</h1>
+
+    <div class="menu-container">
+        <h3>Hamburguesas</h3>
+        <div class="item"><span>COVA de pollo</span> <span>$6</span></div>
+        <div class="item"><span>COVA de carne</span> <span>$6</span></div>
+        
+        <h3>Perros</h3>
+        <div class="item"><span>Perro caliente especial</span> <span>$3</span></div>
+        
+        <h3>Bebidas</h3>
+        <div class="item"><span>Cocacola de lata</span> <span>$2</span></div>
+        <div class="item"><span>Malta de lata</span> <span>$2</span></div>
+        <div class="item"><span>Agua de botella</span> <span>$1</span></div>
+    </div>
+
+    <a href="https://wa.link/q0c1x2" class="btn-whatsapp" target="_blank">¡Realiza tu pedido por WhatsApp!</a>
+
+</body>
+</html>
