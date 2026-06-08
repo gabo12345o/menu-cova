@@ -10,7 +10,7 @@
         .menu-container { max-width: 600px; margin: 0 auto; border: 2px solid #0055aa; padding: 20px; border-radius: 10px; background-color: #f0f8ff; }
         .item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #cce5ff; font-size: 1.1em; }
         .btn-add { background-color: #0055aa; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
-        #carrito { margin-top: 30px; border-top: 2px solid #0055aa; padding-top: 20px; }
+        #carrito { margin-top: 30px; border-top: 2px solid #0055aa; padding-top: 20px; text-align: left; }
         .btn-whatsapp { display: inline-block; margin-top: 20px; padding: 15px 25px; background-color: #25D366; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 5px; cursor: pointer; border: none; }
     </style>
 </head>
@@ -34,7 +34,7 @@
 
         <div id="carrito">
             <h3>Tu Carrito</h3>
-            <ul id="lista-carrito" style="text-align: left;"></ul>
+            <ul id="lista-carrito"></ul>
             <p><strong>Total: $<span id="total">0.00</span></strong></p>
             <button class="btn-whatsapp" onclick="enviarPedido()">Enviar Pedido por WhatsApp</button>
         </div>
@@ -43,13 +43,11 @@
     <script>
         let carrito = [];
         let total = 0;
-
         function agregar(nombre, precio) {
             carrito.push({ nombre, precio });
             total += precio;
             actualizarUI();
         }
-
         function actualizarUI() {
             const lista = document.getElementById('lista-carrito');
             lista.innerHTML = '';
@@ -60,7 +58,6 @@
             });
             document.getElementById('total').textContent = total.toFixed(2);
         }
-
         function enviarPedido() {
             let mensaje = "Hola, quiero realizar este pedido:%0A";
             carrito.forEach(item => { mensaje += `- ${item.nombre}: $${item.precio}%0A`; });
