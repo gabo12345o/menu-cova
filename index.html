@@ -4,70 +4,69 @@
     <meta charset="UTF-8">
     <title>COVA - Menú de Pedidos</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: #003366;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-        .logo {
-            width: 200px;
-            margin-bottom: 20px;
-        }
+        body { font-family: Arial, sans-serif; background-color: #ffffff; color: #003366; margin: 0; padding: 20px; text-align: center; }
+        .logo { width: 200px; margin-bottom: 20px; }
         h1 { color: #0055aa; }
-        .menu-container {
-            max-width: 600px;
-            margin: 0 auto;
-            border: 2px solid #0055aa;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #f0f8ff;
-        }
-        .item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #cce5ff;
-            font-size: 1.1em;
-        }
-        .item:last-child { border-bottom: none; }
-        .btn-whatsapp {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 15px 25px;
-            background-color: #0055aa;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-        .btn-whatsapp:hover { background-color: #003366; }
+        .menu-container { max-width: 600px; margin: 0 auto; border: 2px solid #0055aa; padding: 20px; border-radius: 10px; background-color: #f0f8ff; }
+        .item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #cce5ff; font-size: 1.1em; }
+        .btn-add { background-color: #0055aa; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+        #carrito { margin-top: 30px; border-top: 2px solid #0055aa; padding-top: 20px; }
+        .btn-whatsapp { display: inline-block; margin-top: 20px; padding: 15px 25px; background-color: #25D366; color: #ffffff; text-decoration: none; font-weight: bold; border-radius: 5px; cursor: pointer; border: none; }
     </style>
 </head>
 <body>
 
-    <!-- Logo actualizado con el nombre correcto -->
     <img src="logo.png.png" alt="Logo COVA" class="logo">
-    
     <h1>Menú COVA</h1>
 
     <div class="menu-container">
         <h3>Hamburguesas</h3>
-        <div class="item"><span>COVA de pollo</span> <span>$6</span></div>
-        <div class="item"><span>COVA de carne</span> <span>$6</span></div>
+        <div class="item"><span>COVA de pollo - $6</span> <button class="btn-add" onclick="agregar('COVA de pollo', 6)">Agregar</button></div>
+        <div class="item"><span>COVA de carne - $6</span> <button class="btn-add" onclick="agregar('COVA de carne', 6)">Agregar</button></div>
         
         <h3>Perros</h3>
-        <div class="item"><span>Perro caliente especial</span> <span>$3</span></div>
+        <div class="item"><span>Perro caliente especial - $2.5</span> <button class="btn-add" onclick="agregar('Perro caliente especial', 2.5)">Agregar</button></div>
         
         <h3>Bebidas</h3>
-        <div class="item"><span>Cocacola de lata</span> <span>$2</span></div>
-        <div class="item"><span>Malta de lata</span> <span>$2</span></div>
-        <div class="item"><span>Agua de botella</span> <span>$1</span></div>
+        <div class="item"><span>Cocacola de lata - $2</span> <button class="btn-add" onclick="agregar('Cocacola de lata', 2)">Agregar</button></div>
+        <div class="item"><span>Malta de lata - $2</span> <button class="btn-add" onclick="agregar('Malta de lata', 2)">Agregar</button></div>
+        <div class="item"><span>Agua de botella - $1</span> <button class="btn-add" onclick="agregar('Agua de botella', 1)">Agregar</button></div>
+
+        <div id="carrito">
+            <h3>Tu Carrito</h3>
+            <ul id="lista-carrito" style="text-align: left;"></ul>
+            <p><strong>Total: $<span id="total">0.00</span></strong></p>
+            <button class="btn-whatsapp" onclick="enviarPedido()">Enviar Pedido por WhatsApp</button>
+        </div>
     </div>
 
-    <a href="https://wa.link/q0c1x2" class="btn-whatsapp" target="_blank">¡Realiza tu pedido por WhatsApp!</a>
+    <script>
+        let carrito = [];
+        let total = 0;
 
+        function agregar(nombre, precio) {
+            carrito.push({ nombre, precio });
+            total += precio;
+            actualizarUI();
+        }
+
+        function actualizarUI() {
+            const lista = document.getElementById('lista-carrito');
+            lista.innerHTML = '';
+            carrito.forEach(item => {
+                let li = document.createElement('li');
+                li.textContent = `${item.nombre} - $${item.precio}`;
+                lista.appendChild(li);
+            });
+            document.getElementById('total').textContent = total.toFixed(2);
+        }
+
+        function enviarPedido() {
+            let mensaje = "Hola, quiero realizar este pedido:%0A";
+            carrito.forEach(item => { mensaje += `- ${item.nombre}: $${item.precio}%0A`; });
+            mensaje += `%0ATotal a pagar: $${total.toFixed(2)}`;
+            window.open(`https://wa.me/584122189282?text=${mensaje}`);
+        }
+    </script>
 </body>
 </html>
